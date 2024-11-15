@@ -24,7 +24,7 @@ public class ListOfWords{
 
             while (word != null) {
                 word = word.strip().toLowerCase();
-                if (checkWord(word)) {
+                if (isCorrectWord(word)) {
                     listOfWords.add(word);
                 }
                 word = reader.readLine();
@@ -37,7 +37,7 @@ public class ListOfWords{
 
     }
 
-    private boolean checkWord(String word){
+    private boolean isCorrectWord(String word){
         return !(word.isBlank() || word.length()<5 || word.contains("-") || word.contains(" "));
     }
 

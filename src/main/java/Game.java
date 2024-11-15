@@ -18,7 +18,7 @@ public class Game {
 
             switch (scanner.nextLine().toLowerCase()) {
                 case "д":
-                    play();
+                    playSwitcher();
                     System.out.println("Вы хотите сыграть еще раз?");
                     break;
                 case "н":
@@ -32,38 +32,53 @@ public class Game {
         }
     }
 
-  private void play() {
-        FindLetter findLetter = new FindLetter();
-        int resultOfCheck;
-        int countOfErrors = 0;
+  private void playSwitcher() {
+      CheckerService checkerService = new CheckerService();
+//      System.out.println(checkerService.printSearchWord());
+      String resultOfCheck;
+      int countOfErrors = 0;
+
       System.out.println("Нужно найти все неизвестные буквы в слове.");
       System.out.println("Можно ввести одну букву или все слово целиком.");
       System.out.println("У вас будет 5 попыток :)");
+      System.out.println("исунок статуса!!!");//
       System.out.print("Вот ваше слово: ");
 
       while (true) {
-            findLetter.printWordWithHiddenLetters();
+          checkerService.printWordWithHiddenLetters();
             System.out.println("Жду от вас букву");
-            resultOfCheck = findLetter.check(scanner.nextLine());
+            resultOfCheck = checkerService.check(scanner.nextLine());
 
-            if (resultOfCheck == 3){ countOfErrors++;}
-            if (countOfErrors == 5) {resultOfCheck = 4;}
+            if (resultOfCheck.equals("неверная буква")){ countOfErrors++;}
+            if (countOfErrors == 5) {resultOfCheck = "проиграл";}
 
             switch (resultOfCheck) {
-                case 1:
-                    System.out.println("Поздравляю, вы выйграли игру, искомое слово: " + findLetter.getWordToFind()+".");
+                case "выйграл":
+                    System.out.println("Поздравляю, вы выйграли игру, искомое слово: " + checkerService.printSearchWord()+".");
+                    System.out.println("исунок победы Фанфары!!!");//
                     return;
-                case 2:
+                case "верная буква":
                     System.out.println("Поздравляю, вы выбрали правильную букву, пролоджайте в том же духе!!!");
                     break;
 
-                case 3:
-                    System.out.println("К сожалению ошибка! ВЫ все еще имеете " + (5 - countOfErrors) + " попытки");
+                case "неверная буква":
+                    System.out.println("К сожалению ошибка! Вы все еще имеете " + (5 - countOfErrors) + " попытки");
+                    System.out.println("исунок Мена!!!");//
                     break;
-                case 4:
-                    System.out.println("К сожалению вы проиграли. Искомое слово " + findLetter.getWordToFind());
+                case "проиграл":
+                    System.out.println("К сожалению вы проиграли. Искомое слово " + checkerService.printSearchWord());
+                    System.out.println("исунок Мена Финальный!!!");//
                     return;
+
+                case "невалидная буква"
+                        :System.out.println("Вы ввели неверную букву, введите кириллицу");
+                    break;
+
+                case "неуникальная буква"
+                        :System.out.println("Вы уже вводили эту букву, введите новую букву");
+                    break;
             }
+
 
 
         }
