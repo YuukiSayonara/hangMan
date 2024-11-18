@@ -7,13 +7,13 @@ public class CheckerClass {
     private final String searchWord;
     private Set<String> hiddenLetters;
     private String[] wordWithHiddenLetters;
-    private Set<String> rightLetters ;
+    private Set<String> validLetters;
     private Set<String> userEnteredLetters;
 
     public CheckerClass() {
         searchWord = new RandomWord().getRandomWord();
         setHiddenLetters();
-        setRightLetters();
+        setValidLetters();
         userEnteredLetters = new HashSet<>();
     }
 
@@ -25,8 +25,8 @@ public class CheckerClass {
         return wordWithHiddenLetters;
     }
 
-    public Set<String> getRightLetters() {
-        return rightLetters;
+    public Set<String> getValidLetters() {
+        return validLetters;
     }
 
     public Set<String> getUserEnteredLetters() {
@@ -55,12 +55,12 @@ public class CheckerClass {
         }
 
     }
-        private void setRightLetters(){
-         rightLetters = new HashSet<>();
+        private void setValidLetters(){
+         validLetters = new HashSet<>();
             for (int i =1072 ; i <1104 ; i++) {
-                rightLetters.add(Character.toString(i));
+                validLetters.add(Character.toString(i));
             }
-            rightLetters.add(Character.toString(1105)); //ё
+            validLetters.add(Character.toString(1105)); //ё
 
         }
 

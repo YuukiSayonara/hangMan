@@ -7,20 +7,20 @@ public class CheckerService {
         checkerClass = new CheckerClass();
     }
 
-    public String check(String playerWord) {
+    public ResultOfCheck check(String playerWord) {
         playerWord = playerWord.toLowerCase();
         
-        if (isTargetWord(playerWord)) return "выйграл";
-        if(isNotRightLetters(playerWord)) return "невалидная буква";
+        if (isTargetWord(playerWord)) return ResultOfCheck.VICTORY;
+        if(isNotValidLetters(playerWord)) return ResultOfCheck.NOT_VALID_LETTER;
         
-        if(isNotUniquePlayerLetter(playerWord)) return "неуникальная буква";
+        if(isNotUniquePlayerLetter(playerWord)) return ResultOfCheck.NOT_UNIQUE_LETTER;
         checkerClass.setUserEnteredLetters(playerWord);
         
         if (isTargetLetter(playerWord)) {
             if (checkerClass.getHiddenLetters().isEmpty()) {
-                return "выйграл";
-            } else return "верная буква";
-        } else return "неверная буква";
+                return ResultOfCheck.VICTORY;
+            } else return ResultOfCheck.RIGHT_LETTER;
+        } else return ResultOfCheck.NOT_RIGHT_LETTER;
 
     }
 
@@ -37,8 +37,8 @@ public class CheckerService {
         return false;
     }
 
-    private boolean isNotRightLetters(String playerLetter) {
-        return !checkerClass.getRightLetters().contains(playerLetter);
+    private boolean isNotValidLetters(String playerLetter) {
+        return !checkerClass.getValidLetters().contains(playerLetter);
     }
 
     private boolean isNotUniquePlayerLetter(String playerLetter) {

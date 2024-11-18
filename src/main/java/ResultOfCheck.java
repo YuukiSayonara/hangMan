@@ -1,0 +1,5 @@
+package main.java;
+
+public enum ResultOfCheck {
+    VICTORY,RIGHT_LETTER,LOSS,NOT_UNIQUE_LETTER,NOT_RIGHT_LETTER,NOT_VALID_LETTER;
+}
